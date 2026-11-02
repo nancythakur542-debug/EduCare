@@ -1,0 +1,73 @@
+<div class="row mb-4">
+    <div class="col-md-6 mb-4">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Book Counselling Session</h2>
+            <form action="/student/appointments" method="POST">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Select Counsellor</label>
+                    <select name="counsellorId" class="form-select" required>
+                        <% counsellors.forEach(c=> { %>
+                            <option value="<%= c._id %>">
+                                <%= c.name %> (<%= c.specialization || c.department %>)
+                            </option>
+                            <% }) %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Date</label>
+                    <input type="date" name="date" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Time Slot</label>
+                    <select name="timeSlot" class="form-select" required>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:30 AM">11:30 AM</option>
+                        <option value="02:00 PM">02:00 PM</option>
+                        <option value="04:00 PM">04:00 PM</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-sage w-100">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">My Appointments</h2>
+            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                <table class="table table-sm align-middle">
+                    <thead>
+                        <tr>
+                            <th>Counsellor</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% appointments.forEach(a=> { %>
+                            <tr>
+                                <td>
+                                    <%= a.counsellor.name %>
+                                </td>
+                                <td>
+                                    <%= new Date(a.date).toLocaleDateString() %> (<%= a.timeSlot %>)
+                                </td>
+                                <td><span class="badge bg-secondary">
+                                        <%= a.status %>
+                                    </span></td>
+                                <td>
+                                    <% if (a.status==='Scheduled' ) { %>
+                                        <form action="/student/appointments/<%= a._id %>/cancel" method="POST"
+                                            class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+                                        </form>
+                                        <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="row justify-content-center py-5">
+    <div class="col-md-5">
+        <div class="card p-4">
+            <h2 class="h4 fw-bold mb-4 text-center">Sign In to EduCare</h2>
+            <% if (error) { %>
+                <div class="alert alert-danger py-2 small">
+                    <%= error %>
+                </div>
+                <% } %>
+                    <form action="/auth/login" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Email Address</label>
+                            <input type="email" name="email" class="form-control" value="<%= oldInput.email || '' %>"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-sage w-100 mb-3">Sign In</button>
+                        <p class="text-center small mb-0">Don't have an account? <a href="/auth/register">Register</a>
+                        </p>
+                    </form>
+        </div>
+    </div>
+</div>

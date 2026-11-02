@@ -1,0 +1,56 @@
+<div class="row mb-4">
+    <div class="col-md-6 mb-4">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Record Daily Mood</h2>
+            <form action="/student/mood" method="POST">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Select Mood</label>
+                    <select name="mood" class="form-select" required>
+                        <option value="Very Happy">Very Happy</option>
+                        <option value="Calm">Calm</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Stressed">Stressed</option>
+                        <option value="Sad">Sad</option>
+                        <option value="Anxious">Anxious</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Optional Note</label>
+                    <textarea name="note" class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-sage w-100">Save Mood Entry</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Mood History</h2>
+            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                <table class="table table-sm align-middle">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mood</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% moodHistory.forEach(entry=> { %>
+                            <tr>
+                                <td>
+                                    <%= new Date(entry.createdAt).toLocaleDateString() %>
+                                </td>
+                                <td><span class="badge bg-secondary">
+                                        <%= entry.mood %>
+                                    </span></td>
+                                <td>
+                                    <%= entry.note || '-' %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

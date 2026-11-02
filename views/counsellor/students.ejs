@@ -1,0 +1,83 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card p-4">
+            <h1 class="h3 fw-bold mb-1">
+                <%= student.name %>'s Student Profile
+            </h1>
+            <p class="text-muted mb-0">
+                <%= student.department || 'General' %> | ID: <%= student.studentId || 'N/A' %>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Check-In History</h2>
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Stress</th>
+                            <th>Sleep</th>
+                            <th>Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% checkIns.forEach(c=> { %>
+                            <tr>
+                                <td>
+                                    <%= new Date(c.createdAt).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= c.stressLevel %>/5
+                                </td>
+                                <td>
+                                    <%= c.sleepQuality %>/5
+                                </td>
+                                <td><span class="badge bg-secondary">
+                                        <%= c.riskScore %>
+                                    </span></td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Risk Alerts</h2>
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Level</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% alerts.forEach(a=> { %>
+                            <tr>
+                                <td>
+                                    <%= new Date(a.createdAt).toLocaleDateString() %>
+                                </td>
+                                <td><span class="badge bg-danger">Level <%= a.riskLevel %></span></td>
+                                <td>
+                                    <%= a.reason %>
+                                </td>
+                                <td>
+                                    <%= a.reviewStatus %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

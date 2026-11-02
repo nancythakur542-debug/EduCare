@@ -1,0 +1,64 @@
+<div class="row mb-4">
+    <div class="col-md-6 mb-4">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Well-Being Check-In</h2>
+            <form action="/student/checkin" method="POST">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Stress Level (1-5)</label>
+                    <input type="number" name="stressLevel" class="form-control" min="1" max="5" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Sleep Quality (1-5)</label>
+                    <input type="number" name="sleepQuality" class="form-control" min="1" max="5" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Academic Pressure (1-5)</label>
+                    <input type="number" name="academicPressure" class="form-control" min="1" max="5" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Emotional Well-Being (1-5)</label>
+                    <input type="number" name="emotionalWellbeing" class="form-control" min="1" max="5" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">General State Description</label>
+                    <input type="text" name="generalMood" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-sage w-100">Submit Check-In</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h2 class="h5 fw-bold mb-3">Past Check-Ins</h2>
+            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                <table class="table table-sm align-middle">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Stress</th>
+                            <th>Sleep</th>
+                            <th>Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% checkIns.forEach(c=> { %>
+                            <tr>
+                                <td>
+                                    <%= new Date(c.createdAt).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= c.stressLevel %>/5
+                                </td>
+                                <td>
+                                    <%= c.sleepQuality %>/5
+                                </td>
+                                <td><span class="badge bg-<%= c.riskScore >= 4 ? 'danger' : 'secondary' %>">Level <%=
+                                            c.riskScore %></span></td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

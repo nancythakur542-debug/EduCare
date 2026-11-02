@@ -1,0 +1,63 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card p-4 bg-gradient">
+            <h1 class="h3 fw-bold mb-1">Welcome back, <%= user.name %>
+            </h1>
+            <p class="text-muted mb-0">Your daily mental well-being command center.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4 mb-3">
+        <div class="card p-3 h-100">
+            <h6 class="text-muted small fw-semibold mb-2">Today's Mood</h6>
+            <h4 class="fw-bold">
+                <%= todayMood ? todayMood.mood : 'Not logged yet' %>
+            </h4>
+            <a href="/student/mood" class="btn btn-sm btn-outline-secondary mt-3">Log Mood</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card p-3 h-100">
+            <h6 class="text-muted small fw-semibold mb-2">Latest Check-In</h6>
+            <h4 class="fw-bold">
+                <%= latestCheckIn ? 'Stress: ' + latestCheckIn.stressLevel + '/5' : 'No check-in yet' %>
+            </h4>
+            <a href="/student/checkin" class="btn btn-sm btn-outline-secondary mt-3">Take Check-In</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card p-3 h-100">
+            <h6 class="text-muted small fw-semibold mb-2">Next Appointment</h6>
+            <h4 class="fw-bold">
+                <%= upcomingAppointment ? new Date(upcomingAppointment.date).toLocaleDateString() + ' (' +
+                    upcomingAppointment.timeSlot + ')' : 'None scheduled' %>
+            </h4>
+            <a href="/student/appointments" class="btn btn-sm btn-outline-secondary mt-3">Manage Sessions</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mb-3">
+        <div class="card p-4 h-100">
+            <h5 class="fw-bold mb-3">Quick Actions</h5>
+            <div class="d-flex gap-3 flex-wrap">
+                <a href="/student/chat" class="btn btn-sage">Open AI Support Chat</a>
+                <a href="/student/checkin" class="btn btn-outline-secondary">Well-Being Check-In</a>
+                <a href="/student/appointments" class="btn btn-outline-secondary">Book Counsellor</a>
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#crisisModal">Crisis
+                    Support</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card p-4 h-100">
+            <h5 class="fw-bold mb-3">Crisis Helplines</h5>
+            <p class="small text-muted mb-2">Tele-MANAS Toll-Free 24/7:</p>
+            <h5 class="fw-bold text-danger">14416</h5>
+            <h5 class="fw-bold text-danger">1-800-891-4416</h5>
+        </div>
+    </div>
+</div>

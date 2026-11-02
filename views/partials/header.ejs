@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg px-4 sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+            <i data-lucide="heart-pulse" class="text-success"></i> EduCare
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center gap-3">
+                <% if (user) { %>
+                    <% if (user.role==='student' ) { %>
+                        <li class="nav-item"><a class="nav-link" href="/student/dashboard">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/student/mood">Mood Tracker</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/student/checkin">Check-Ins</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/student/chat">AI Support</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/student/appointments">Counselling</a></li>
+                        <% } else if (user.role==='counsellor' ) { %>
+                            <li class="nav-item"><a class="nav-link" href="/counsellor/dashboard">Counsellor Portal</a>
+                            </li>
+                            <% } else if (user.role==='admin' ) { %>
+                                <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Admin Overview</a></li>
+                                <% } %>
+                                    <li class="nav-item"><span class="badge bg-secondary">
+                                            <%= user.name %> (<%= user.role %>)
+                                        </span></li>
+                                    <li class="nav-item"><a class="btn btn-outline-danger btn-sm"
+                                            href="/auth/logout">Logout</a></li>
+                                    <% } else { %>
+                                        <li class="nav-item"><a class="nav-link" href="/auth/login">Login</a></li>
+                                        <li class="nav-item"><a class="btn btn-sage btn-sm" href="/auth/register">Get
+                                                Started</a></li>
+                                        <% } %>
+                                            <li class="nav-item">
+                                                <button class="btn btn-sm btn-outline-secondary" id="themeToggle">
+                                                    <i data-lucide="moon"></i>
+                                                </button>
+                                            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
